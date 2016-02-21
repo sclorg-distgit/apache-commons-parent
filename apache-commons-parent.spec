@@ -7,7 +7,7 @@
 
 Name:             %{?scl_prefix}%{pkg_name}
 Version:          26
-Release:          8.11%{?dist}
+Release:          8.12%{?dist}
 Summary:          Apache Commons Parent Pom
 License:          ASL 2.0
 URL:              http://svn.apache.org/repos/asf/commons/proper/%{short_name}/tags/%{short_name}-%{version}/
@@ -22,16 +22,16 @@ BuildArch:        noarch
 
 BuildRequires:    %{?scl_prefix_java_common}maven-local
 
-BuildRequires:    maven30-mvn(org.apache:apache:pom:)
-BuildRequires:    maven30-mvn(org.apache.felix:maven-bundle-plugin)
-BuildRequires:    maven30-mvn(org.apache.maven.plugins:maven-antrun-plugin)
-BuildRequires:    maven30-mvn(org.apache.maven.plugins:maven-compiler-plugin)
-BuildRequires:    maven30-mvn(org.apache.maven.plugins:maven-jar-plugin)
-BuildRequires:    maven30-mvn(org.apache.maven.plugins:maven-surefire-plugin)
-BuildRequires:    maven30-mvn(org.apache.rat:apache-rat-plugin)
-BuildRequires:    maven30-mvn(org.codehaus.mojo:buildnumber-maven-plugin)
+BuildRequires:    %{?scl_prefix}mvn(org.apache:apache:pom:)
+BuildRequires:    %{?scl_prefix}mvn(org.apache.felix:maven-bundle-plugin)
+BuildRequires:    %{?scl_prefix}mvn(org.apache.maven.plugins:maven-antrun-plugin)
+BuildRequires:    %{?scl_prefix}mvn(org.apache.maven.plugins:maven-compiler-plugin)
+BuildRequires:    %{?scl_prefix}mvn(org.apache.maven.plugins:maven-jar-plugin)
+BuildRequires:    %{?scl_prefix}mvn(org.apache.maven.plugins:maven-surefire-plugin)
+BuildRequires:    %{?scl_prefix}mvn(org.apache.rat:apache-rat-plugin)
+BuildRequires:    %{?scl_prefix}mvn(org.codehaus.mojo:buildnumber-maven-plugin)
 
-Requires:         maven30-mvn(org.codehaus.mojo:buildnumber-maven-plugin)
+Requires:         %{?scl_prefix}mvn(org.codehaus.mojo:buildnumber-maven-plugin)
 
 
 %description
@@ -39,7 +39,7 @@ The Project Object Model files for the apache-commons packages.
 
 %prep
 %setup -q -n %{short_name}-%{version}
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %patch1 -p0
 
@@ -47,13 +47,13 @@ set -e -x
 %{?scl:EOF}
 
 %build
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_build
 %{?scl:EOF}
 
 %install
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_install
 %{?scl:EOF}
@@ -63,6 +63,9 @@ set -e -x
 %doc LICENSE.txt NOTICE.txt
 
 %changelog
+* Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 26-8.12
+- maven33 rebuild #2
+
 * Sat Jan 09 2016 Michal Srb <msrb@redhat.com> - 26-8.11
 - maven33 rebuild
 
