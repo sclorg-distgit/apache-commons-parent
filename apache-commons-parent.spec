@@ -7,7 +7,7 @@
 
 Name:             %{?scl_prefix}%{pkg_name}
 Version:          26
-Release:          8.12%{?dist}
+Release:          8.13%{?dist}
 Summary:          Apache Commons Parent Pom
 License:          ASL 2.0
 URL:              http://svn.apache.org/repos/asf/commons/proper/%{short_name}/tags/%{short_name}-%{version}/
@@ -20,7 +20,7 @@ Source0:          %{short_name}-%{version}.tar.xz
 Patch1:           %{pkg_name}-remove-build-plugin.patch
 BuildArch:        noarch
 
-BuildRequires:    %{?scl_prefix_java_common}maven-local
+BuildRequires:    %{?scl_prefix}maven-local
 
 BuildRequires:    %{?scl_prefix}mvn(org.apache:apache:pom:)
 BuildRequires:    %{?scl_prefix}mvn(org.apache.felix:maven-bundle-plugin)
@@ -63,6 +63,9 @@ set -e -x
 %doc LICENSE.txt NOTICE.txt
 
 %changelog
+* Mon Feb 08 2016 Michal Srb <msrb@redhat.com> - 26-8.13
+- Fix BR on maven-local & co.
+
 * Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 26-8.12
 - maven33 rebuild #2
 
